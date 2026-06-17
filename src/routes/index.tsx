@@ -109,14 +109,27 @@ function Index() {
           </div>
 
           <h1
-            className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r from-rose-600 via-pink-500 to-fuchsia-500 bg-clip-text text-transparent"
+            className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r from-rose-600 via-pink-500 to-fuchsia-500 bg-clip-text text-transparent leading-tight"
             style={{ fontFamily: "'Brush Script MT', cursive" }}
           >
-            Will u marry me?
+            Will u marry me<br />Alisha?
           </h1>
           <p className="mt-2 text-sm text-rose-900/70 italic">
             Please sign in your heart to continue 💌
           </p>
+
+          {/* Tiny love + fun lines */}
+          <div className="mt-4 grid grid-cols-1 gap-2 text-[12px]">
+            <div className="rounded-xl bg-rose-100/60 border border-rose-200 px-3 py-2 text-rose-700 italic">
+              "Tum mere ho, bas itna hi kaafi hai zindagi ke liye." 💞
+            </div>
+            <div className="rounded-xl bg-pink-100/60 border border-pink-200 px-3 py-2 text-pink-700 italic">
+              Warning: Logging in may cause sudden butterflies 🦋 & forever smiles 😄
+            </div>
+            <div className="rounded-xl bg-fuchsia-100/60 border border-fuchsia-200 px-3 py-2 text-fuchsia-700 italic">
+              Username: Meri Jaan • Password: Tumhara Pyaar 🔐💘
+            </div>
+          </div>
 
           {/* Editable login fields */}
           <div className="mt-6 space-y-4 text-left">
