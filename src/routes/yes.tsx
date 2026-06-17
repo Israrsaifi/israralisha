@@ -23,6 +23,42 @@ const LOVE_LINES = [
   "I love you more than chai loves biscuits. ☕🍪",
 ];
 
+const SHAYARI = [
+  {
+    text: "Hazaaron khwahishen aisi ki har khwahish pe dam nikle,\nBahut nikle mere armaan, lekin phir bhi kam nikle.",
+    author: "— Mirza Ghalib",
+  },
+  {
+    text: "Ishq par zor nahin, hai yeh woh aatish 'Ghalib',\nKi lagaye na lage aur bujhaye na bane.",
+    author: "— Mirza Ghalib",
+  },
+  {
+    text: "Tum mere paas hote ho goya,\nJab koi doosra nahin hota.",
+    author: "— Mirza Ghalib",
+  },
+  {
+    text: "Mohabbat mein nahin hai farq jeene aur marne ka,\nUsi ko dekh kar jeete hain jis kaafir pe dam nikle.",
+    author: "— Mirza Ghalib",
+  },
+  {
+    text: "Teri aankhon ke siva duniya mein rakha kya hai,\nYeh ubharte hue chehron ki taraf dekha kya hai.",
+    author: "— Sahir Ludhianvi",
+  },
+  {
+    text: "Tum mile to mili zindagi ki wajah —\nVarna hum yunhi bekaar se the.",
+    author: "— Anonymous",
+  },
+];
+
+const TESTIMONIALS = [
+  { name: "Chand 🌙", role: "Night Sky", quote: "Inko dekh kar mujhe bhi sharm aati hai — itni chamak insaano mein kahan!" },
+  { name: "Gulaab 🌹", role: "Garden Resident", quote: "Alisha ki muskaan ke saamne meri khoobsurti bhi pheeki lagti hai." },
+  { name: "Chai ☕", role: "Daily Companion", quote: "Inki jodi meri tarah perfect hai — thodi meethi, thodi strong, full desi." },
+  { name: "Cupid 💘", role: "Senior Matchmaker", quote: "Yeh case mera best work hai. Retirement le raha hoon ab." },
+  { name: "Time ⏳", role: "The Eternal", quote: "Inke saath rukne ka mann karta hai mera bhi." },
+  { name: "Dil ❤️", role: "Israr's Heart", quote: "Mai sirf Alisha ke naam pe dhadakta hoon — baaki sab formality hai." },
+];
+
 const FUNNY_FACTS = [
   { k: "Times I'll annoy you", v: "∞" },
   { k: "Times I'll forgive you", v: "∞ + 1" },
