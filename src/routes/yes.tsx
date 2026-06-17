@@ -159,6 +159,58 @@ function YesPage() {
           </div>
         </div>
 
+        {/* Shayari section */}
+        <div className="mt-14">
+          <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-rose-500">
+            ✒️ Ishq ki Shayari ✒️
+          </h2>
+          <p className="mt-2 text-sm text-rose-700/70 italic">Ghalib, Sahir aur dil ki kuch deep lines — tumhare naam</p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            {SHAYARI.map((s, i) => (
+              <div
+                key={i}
+                className="relative rounded-2xl bg-gradient-to-br from-white/85 to-rose-50/70 backdrop-blur border border-rose-200 p-5 text-left shadow-md hover:shadow-rose-200 transition"
+              >
+                <div className="absolute -top-3 left-4 text-3xl text-rose-300 leading-none">“</div>
+                <p
+                  className="whitespace-pre-line text-[15px] leading-relaxed text-rose-900/85 italic"
+                  style={{ fontFamily: "Georgia, serif" }}
+                >
+                  {s.text}
+                </p>
+                <p className="mt-3 text-[11px] font-semibold uppercase tracking-widest text-rose-500">
+                  {s.author}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonials */}
+        <div className="mt-14">
+          <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-rose-500">
+            🌟 Testimonials for the Jodi 🌟
+          </h2>
+          <p className="mt-2 text-sm text-rose-700/70 italic">Even the universe agrees — Alisha + Israr = ❤️</p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {TESTIMONIALS.map((t) => (
+              <div
+                key={t.name}
+                className="rounded-2xl bg-white/75 backdrop-blur border border-pink-200 p-4 text-left shadow hover:scale-[1.02] transition"
+              >
+                <p className="text-sm text-rose-900/85 italic" style={{ fontFamily: "Georgia, serif" }}>
+                  "{t.quote}"
+                </p>
+                <div className="mt-3 flex items-center justify-between">
+                  <span className="text-sm font-bold text-rose-600">{t.name}</span>
+                  <span className="text-[10px] uppercase tracking-wider text-pink-500">{t.role}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+
         {/* Funny stats */}
         <div className="mt-12">
           <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-rose-500">
