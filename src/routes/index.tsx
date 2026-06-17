@@ -1,105 +1,196 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { Heart } from "lucide-react";
+import { useRef, useState } from "react";
+import { Heart, Sparkles, Lock, Mail } from "lucide-react";
+import { CoupleSvg } from "@/components/CoupleSvg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Will You Marry Me?" },
-      { name: "description", content: "A little question for you 💍" },
+      { title: "Will You Marry Me? 💍" },
+      { name: "description", content: "A little love test for the love of my life 💌" },
     ],
   }),
   component: Index,
 });
 
+const FUNNY_MESSAGES = [
+  "Nope, try again 😜",
+  "Wrong button silly 🙈",
+  "Catch me if you can! 🏃‍♀️",
+  "That button is allergic to NO 🌹",
+  "Even the button is shy 💕",
+  "404: No-button not found 🔍",
+  "It's a YES kinda day 💖",
+  "Stop chasing, start saying YES 💍",
+];
+
 function Index() {
   const navigate = useNavigate();
-  const [noPos, setNoPos] = useState<{ top: string; left: string } | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const yesRef = useRef<HTMLButtonElement>(null);
+  const [noPos, setNoPos] = useState<{ top: number; left: number } | null>(null);
+  const [msg, setMsg] = useState<string>("");
+  const [clicks, setClicks] = useState(0);
 
   const dodge = () => {
-    const top = Math.random() * 80 + 5; // 5% - 85%
-    const left = Math.random() * 80 + 5;
-    setNoPos({ top: `${top}%`, left: `${left}%` });
+    const container = containerRef.current;
+    const yes = yesRef.current;
+    if (!container || !yes) return;
+
+    const cRect = container.getBoundingClientRect();
+    const yRect = yes.getBoundingClientRect();
+
+    const btnW = 90;
+    const btnH = 44;
+    const padding = 8;
+
+    // try up to 30 times to find a position that doesn't overlap Yes button
+    let top = 0;
+    let left = 0;
+    for (let i = 0; i < 30; i++) {
+      top = Math.random() * (cRect.height - btnH - padding * 2) + padding;
+      left = Math.random() * (cRect.width - btnW - padding * 2) + padding;
+
+      const absTop = cRect.top + top;
+      const absLeft = cRect.left + left;
+      const overlapsYes =
+        absLeft < yRect.right + 16 &&
+        absLeft + btnW > yRect.left - 16 &&
+        absTop < yRect.bottom + 16 &&
+        absTop + btnH > yRect.top - 16;
+
+      if (!overlapsYes) break;
+    }
+
+    setNoPos({ top, left });
+    setMsg(FUNNY_MESSAGES[clicks % FUNNY_MESSAGES.length]);
+    setClicks((c) => c + 1);
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-rose-100 via-pink-50 to-amber-50 flex items-center justify-center px-4">
-      {/* Floating hearts */}
-      {Array.from({ length: 12 }).map((_, i) => (
+    <div className="relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-8"
+      style={{
+        background:
+          "radial-gradient(circle at 20% 10%, #ffe5ec 0%, transparent 50%), radial-gradient(circle at 80% 80%, #ffd1dc 0%, transparent 50%), linear-gradient(135deg, #fff5f7 0%, #ffe0eb 50%, #fce4ec 100%)",
+      }}
+    >
+      {/* Decorative floating hearts */}
+      {Array.from({ length: 14 }).map((_, i) => (
         <Heart
           key={i}
-          className="absolute text-rose-300/50 animate-pulse"
+          className="absolute text-rose-300/60 animate-pulse pointer-events-none"
           style={{
-            top: `${(i * 37) % 100}%`,
-            left: `${(i * 53) % 100}%`,
-            width: `${16 + (i % 4) * 8}px`,
-            height: `${16 + (i % 4) * 8}px`,
-            animationDelay: `${i * 0.3}s`,
+            top: `${(i * 41) % 95}%`,
+            left: `${(i * 67) % 95}%`,
+            width: `${14 + (i % 4) * 8}px`,
+            height: `${14 + (i % 4) * 8}px`,
+            animationDelay: `${i * 0.25}s`,
+            animationDuration: `${2 + (i % 3)}s`,
           }}
           fill="currentColor"
         />
       ))}
 
-      <div className="relative z-10 w-full max-w-md rounded-3xl bg-white/80 backdrop-blur-xl shadow-2xl border border-rose-200/60 p-8 sm:p-10 text-center">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-rose-500 shadow-lg shadow-rose-500/40">
-          <Heart className="h-7 w-7 text-white" fill="currentColor" />
+      <div className="relative z-10 w-full max-w-md">
+        {/* Cartoon couple peeking from top */}
+        <div className="mx-auto -mb-8 w-40 h-40 relative z-20">
+          <CoupleSvg className="w-full h-full drop-shadow-xl" />
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text text-transparent">
-          Will u marry me?
-        </h1>
-        <p className="mt-3 text-sm text-rose-900/60">
-          Please log in your answer below 💌
+        <div
+          className="relative rounded-[2rem] bg-white/70 backdrop-blur-2xl border border-white/80 p-7 sm:p-9 text-center"
+          style={{
+            boxShadow:
+              "0 25px 60px -15px rgba(255, 105, 145, 0.4), 0 0 0 1px rgba(255,255,255,0.6) inset",
+          }}
+        >
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 px-4 py-1 text-[10px] font-bold text-white uppercase tracking-widest shadow-lg">
+            <Sparkles className="w-3 h-3" /> Love Login <Sparkles className="w-3 h-3" />
+          </div>
+
+          <h1
+            className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r from-rose-600 via-pink-500 to-fuchsia-500 bg-clip-text text-transparent"
+            style={{ fontFamily: "'Brush Script MT', cursive" }}
+          >
+            Will u marry me?
+          </h1>
+          <p className="mt-2 text-sm text-rose-900/70 italic">
+            Please sign in your heart to continue 💌
+          </p>
+
+          {/* Editable login fields */}
+          <div className="mt-6 space-y-4 text-left">
+            <div className="relative">
+              <label className="text-[11px] font-semibold text-rose-700/80 uppercase tracking-wider">
+                Heart ID
+              </label>
+              <div className="relative mt-1">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-rose-400" />
+                <input
+                  type="text"
+                  defaultValue="alisha@mylove.com"
+                  className="w-full rounded-2xl border-2 border-rose-200 bg-white/80 pl-10 pr-4 py-3 text-sm text-rose-900 placeholder-rose-300 focus:outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-200/50 transition"
+                />
+              </div>
+            </div>
+            <div className="relative">
+              <label className="text-[11px] font-semibold text-rose-700/80 uppercase tracking-wider">
+                Secret Feeling
+              </label>
+              <div className="relative mt-1">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-rose-400" />
+                <input
+                  type="password"
+                  defaultValue="iloveisrar"
+                  className="w-full rounded-2xl border-2 border-rose-200 bg-white/80 pl-10 pr-4 py-3 text-sm text-rose-900 placeholder-rose-300 focus:outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-200/50 transition"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Buttons area */}
+          <div ref={containerRef} className="relative mt-8 h-44 rounded-2xl bg-rose-50/40 border border-dashed border-rose-200">
+            <button
+              ref={yesRef}
+              onClick={() => navigate({ to: "/yes" })}
+              className="absolute left-1/2 top-4 -translate-x-1/2 rounded-full bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 px-10 py-3 text-base font-bold text-white shadow-xl shadow-rose-400/50 hover:scale-110 active:scale-95 transition-transform"
+            >
+              Yes 💖
+            </button>
+
+            <button
+              onMouseEnter={dodge}
+              onFocus={dodge}
+              onTouchStart={(e) => {
+                e.preventDefault();
+                dodge();
+              }}
+              onClick={dodge}
+              style={
+                noPos
+                  ? { top: `${noPos.top}px`, left: `${noPos.left}px` }
+                  : { bottom: "16px", left: "50%", transform: "translateX(-50%)" }
+              }
+              className="absolute rounded-full border-2 border-rose-300 bg-white px-7 py-2.5 text-sm font-semibold text-rose-500 shadow-md transition-all duration-200 ease-out"
+            >
+              No 🙄
+            </button>
+
+            {msg && (
+              <p className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[11px] text-rose-500 font-medium animate-pulse whitespace-nowrap">
+                {msg}
+              </p>
+            )}
+          </div>
+
+          <p className="mt-5 text-xs text-rose-900/50 italic">
+            Psst… the No button is feeling a little nervous 🙈
+          </p>
+        </div>
+
+        <p className="mt-4 text-center text-xs text-rose-700/60">
+          Made with 💕 for my favorite human
         </p>
-
-        {/* Fake login-style fields for the bit */}
-        <div className="mt-6 space-y-3 text-left">
-          <div>
-            <label className="text-xs font-medium text-rose-900/70">Heart ID</label>
-            <input
-              type="text"
-              defaultValue="alisha@love.com"
-              readOnly
-              className="mt-1 w-full rounded-xl border border-rose-200 bg-rose-50/50 px-4 py-3 text-sm text-rose-900 focus:outline-none"
-            />
-          </div>
-          <div>
-            <label className="text-xs font-medium text-rose-900/70">Secret Feeling</label>
-            <input
-              type="password"
-              defaultValue="iloveyou"
-              readOnly
-              className="mt-1 w-full rounded-xl border border-rose-200 bg-rose-50/50 px-4 py-3 text-sm text-rose-900 focus:outline-none"
-            />
-          </div>
-        </div>
-
-        {/* Buttons */}
-        <div className="relative mt-8 h-32">
-          <button
-            onClick={() => navigate({ to: "/yes" })}
-            className="absolute left-1/2 top-2 -translate-x-1/2 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 px-10 py-3 text-base font-semibold text-white shadow-lg shadow-rose-500/40 transition-transform hover:scale-110"
-          >
-            Yes 💖
-          </button>
-
-          <button
-            onMouseEnter={dodge}
-            onFocus={dodge}
-            onTouchStart={dodge}
-            onClick={dodge}
-            style={
-              noPos
-                ? { top: noPos.top, left: noPos.left, transform: "translate(-50%, -50%)" }
-                : { top: "calc(2px + 3.5rem)", left: "50%", transform: "translateX(-50%)" }
-            }
-            className="absolute rounded-full border border-rose-300 bg-white px-8 py-2.5 text-sm font-medium text-rose-600 shadow transition-all duration-300 ease-out"
-          >
-            No
-          </button>
-        </div>
-
-        <p className="mt-6 text-xs text-rose-900/40">Hint: the "No" button is shy 🙈</p>
       </div>
     </div>
   );
