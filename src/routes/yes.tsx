@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, Sparkles, Star } from "lucide-react";
 import { CoupleSvg } from "@/components/CoupleSvg";
 import { AutoCarousel } from "@/components/AutoCarousel";
+import { MemoryCounter } from "@/components/MemoryCounter";
+import { LoveWheel } from "@/components/LoveWheel";
 
 export const Route = createFileRoute("/yes")({
   head: () => ({
@@ -130,7 +132,9 @@ function YesPage() {
       ))}
 
       <main className="relative z-10 mx-auto max-w-3xl px-5 py-12 sm:py-16 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur border border-rose-200 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.3em] text-rose-500 shadow">
+        <MemoryCounter />
+
+        <div className="mt-10 inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur border border-rose-200 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.3em] text-rose-500 shadow">
           <Sparkles className="w-3 h-3" /> She said YES <Sparkles className="w-3 h-3" />
         </div>
 
@@ -262,6 +266,17 @@ function YesPage() {
                 </div>
               ))}
             />
+          </div>
+        </div>
+
+        {/* Lucky Love Wheel */}
+        <div className="mt-16">
+          <h2 className="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-rose-600 via-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
+            🎡 Spin The Wheel of Love ❤️
+          </h2>
+          <p className="mt-2 text-sm text-rose-700/70 italic">Tap SPIN and let destiny pick your reward 💫</p>
+          <div className="mt-8">
+            <LoveWheel />
           </div>
         </div>
 
