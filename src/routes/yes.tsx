@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, Sparkles, Star } from "lucide-react";
 import { CoupleSvg } from "@/components/CoupleSvg";
+import { AutoCarousel } from "@/components/AutoCarousel";
 
 export const Route = createFileRoute("/yes")({
   head: () => ({
@@ -48,6 +49,10 @@ const SHAYARI = [
     text: "Tum mile to mili zindagi ki wajah —\nVarna hum yunhi bekaar se the.",
     author: "— Anonymous",
   },
+  {
+    text: "Tumse milne ke baad pata chala,\nKi dua qubool hone mein der to lagti hai, par hoti zaroor hai.",
+    author: "— Israr (for Alisha)",
+  },
 ];
 
 const TESTIMONIALS = [
@@ -57,6 +62,25 @@ const TESTIMONIALS = [
   { name: "Cupid 💘", role: "Senior Matchmaker", quote: "Yeh case mera best work hai. Retirement le raha hoon ab." },
   { name: "Time ⏳", role: "The Eternal", quote: "Inke saath rukne ka mann karta hai mera bhi." },
   { name: "Dil ❤️", role: "Israr's Heart", quote: "Mai sirf Alisha ke naam pe dhadakta hoon — baaki sab formality hai." },
+  { name: "WiFi 📶", role: "Always Connected", quote: "Inka connection mere se bhi strong hai — kabhi disconnect nahi hota." },
+  { name: "Pizza 🍕", role: "Comfort Food", quote: "Yeh dono ek doosre ke liye utne hi perfect hain jitna mai bhookh ke liye." },
+  { name: "Mirror 🪞", role: "Truth Teller", quote: "Alisha jab Israr ko dekhti hai, mujhe bhi jealousy hoti hai." },
+  { name: "Alarm ⏰", role: "Morning Boss", quote: "Israr ab mujhse pehle uth jata hai — bas Alisha ka message check karne." },
+  { name: "Google 🔍", role: "All-Knowing", quote: "'How to love someone forever' — Israr ne 1000 baar search kiya, jawab Alisha nikla." },
+  { name: "Maa ki Dua 🤲", role: "Sabse Upar", quote: "Meri dua tum dono ke saath hamesha hai — jeete raho, hasste raho." },
+];
+
+const PROMISES = [
+  "Mai vaada karta hoon — har subah tumhari muskaan se shuru karunga. ☀️",
+  "Mai vaada karta hoon — har ladai ke baad pehle SORRY mai bolunga. 🤝",
+  "Mai vaada karta hoon — tumhari har baat dhyan se sununga (cricket match ke time bhi). 🏏",
+  "Mai vaada karta hoon — pizza ka aakhri slice hamesha tumhara. 🍕",
+  "Mai vaada karta hoon — tumhari maa ki har baat sar-aankhon par. 🙏",
+  "Mai vaada karta hoon — tumhari hansi ke liye duniya ke saare jokes yaad rakhunga. 😄",
+  "Mai vaada karta hoon — tumhare buure dino mein tumhari dhal banunga. 🛡️",
+  "Mai vaada karta hoon — Netflix tum chunogi, mai bina complain ke dekhunga. 📺",
+  "Mai vaada karta hoon — kabhi haath chodne ka socha bhi nahi. 🤞",
+  "Mai vaada karta hoon — Alisha, tum meri duniya ho, aur duniya kabhi nahi badalti. 🌍❤️",
 ];
 
 const FUNNY_FACTS = [
@@ -75,7 +99,6 @@ function YesPage() {
           "radial-gradient(circle at 30% 20%, #fff0f5 0%, transparent 60%), radial-gradient(circle at 70% 90%, #ffd6e7 0%, transparent 50%), linear-gradient(135deg, #fff5f7 0%, #ffe4ec 40%, #fce4ec 100%)",
       }}
     >
-      {/* Confetti hearts */}
       {Array.from({ length: 24 }).map((_, i) => (
         <Heart
           key={`h-${i}`}
@@ -128,7 +151,6 @@ function YesPage() {
           <span className="h-px w-16 bg-gradient-to-l from-transparent to-rose-300" />
         </div>
 
-        {/* SVG couple */}
         <div className="mx-auto mt-8 w-full max-w-sm">
           <div
             className="rounded-[2.5rem] bg-white/60 backdrop-blur-xl border-4 border-white p-6"
@@ -159,57 +181,89 @@ function YesPage() {
           </div>
         </div>
 
-        {/* Shayari section */}
+        {/* Shayari carousel */}
         <div className="mt-14">
           <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-rose-500">
             ✒️ Ishq ki Shayari ✒️
           </h2>
           <p className="mt-2 text-sm text-rose-700/70 italic">Ghalib, Sahir aur dil ki kuch deep lines — tumhare naam</p>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            {SHAYARI.map((s, i) => (
-              <div
-                key={i}
-                className="relative rounded-2xl bg-gradient-to-br from-white/85 to-rose-50/70 backdrop-blur border border-rose-200 p-5 text-left shadow-md hover:shadow-rose-200 transition"
-              >
-                <div className="absolute -top-3 left-4 text-3xl text-rose-300 leading-none">“</div>
-                <p
-                  className="whitespace-pre-line text-[15px] leading-relaxed text-rose-900/85 italic"
-                  style={{ fontFamily: "Georgia, serif" }}
+          <div className="mt-5">
+            <AutoCarousel
+              intervalMs={8000}
+              items={SHAYARI.map((s, i) => (
+                <div
+                  key={i}
+                  className="relative rounded-2xl bg-gradient-to-br from-white/90 to-rose-50/80 backdrop-blur border border-rose-200 p-6 sm:p-8 text-left shadow-md min-h-[200px] flex flex-col justify-center"
                 >
-                  {s.text}
-                </p>
-                <p className="mt-3 text-[11px] font-semibold uppercase tracking-widest text-rose-500">
-                  {s.author}
-                </p>
-              </div>
-            ))}
+                  <div className="absolute -top-3 left-4 text-4xl text-rose-300 leading-none">“</div>
+                  <p
+                    className="whitespace-pre-line text-[15px] sm:text-[17px] leading-relaxed text-rose-900/85 italic"
+                    style={{ fontFamily: "Georgia, serif" }}
+                  >
+                    {s.text}
+                  </p>
+                  <p className="mt-4 text-[11px] font-semibold uppercase tracking-widest text-rose-500">
+                    {s.author}
+                  </p>
+                </div>
+              ))}
+            />
           </div>
         </div>
 
-        {/* Testimonials */}
+        {/* Testimonials carousel */}
         <div className="mt-14">
           <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-rose-500">
             🌟 Testimonials for the Jodi 🌟
           </h2>
           <p className="mt-2 text-sm text-rose-700/70 italic">Even the universe agrees — Alisha + Israr = ❤️</p>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {TESTIMONIALS.map((t) => (
-              <div
-                key={t.name}
-                className="rounded-2xl bg-white/75 backdrop-blur border border-pink-200 p-4 text-left shadow hover:scale-[1.02] transition"
-              >
-                <p className="text-sm text-rose-900/85 italic" style={{ fontFamily: "Georgia, serif" }}>
-                  "{t.quote}"
-                </p>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="text-sm font-bold text-rose-600">{t.name}</span>
-                  <span className="text-[10px] uppercase tracking-wider text-pink-500">{t.role}</span>
+          <div className="mt-5">
+            <AutoCarousel
+              intervalMs={6000}
+              items={TESTIMONIALS.map((t) => (
+                <div
+                  key={t.name}
+                  className="rounded-2xl bg-white/85 backdrop-blur border border-pink-200 p-6 sm:p-8 text-left shadow-md min-h-[180px] flex flex-col justify-between"
+                >
+                  <p className="text-base sm:text-lg text-rose-900/85 italic" style={{ fontFamily: "Georgia, serif" }}>
+                    "{t.quote}"
+                  </p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-sm font-bold text-rose-600">{t.name}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-pink-500">{t.role}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            />
           </div>
         </div>
 
+        {/* Promises carousel */}
+        <div className="mt-14">
+          <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-rose-500">
+            💍 Mere Vaade 💍
+          </h2>
+          <p className="mt-2 text-sm text-rose-700/70 italic">Promises from Israr — har ek dil se</p>
+          <div className="mt-5">
+            <AutoCarousel
+              intervalMs={5000}
+              items={PROMISES.map((p, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl bg-gradient-to-br from-rose-500 via-pink-500 to-fuchsia-500 p-6 sm:p-8 text-white shadow-xl min-h-[180px] flex flex-col justify-center"
+                >
+                  <p className="text-xs uppercase tracking-[0.3em] opacity-80">Promise #{i + 1}</p>
+                  <p
+                    className="mt-3 text-xl sm:text-2xl leading-snug"
+                    style={{ fontFamily: "'Brush Script MT', cursive" }}
+                  >
+                    {p}
+                  </p>
+                </div>
+              ))}
+            />
+          </div>
+        </div>
 
         {/* Funny stats */}
         <div className="mt-12">
@@ -233,19 +287,6 @@ function YesPage() {
           </div>
         </div>
 
-        {/* Big love note */}
-        <div className="mt-12 rounded-3xl bg-gradient-to-br from-rose-500 via-pink-500 to-fuchsia-500 p-6 sm:p-8 text-white shadow-2xl shadow-rose-300/60">
-          <p className="text-xs uppercase tracking-[0.4em] opacity-90">A promise</p>
-          <p
-            className="mt-3 text-2xl sm:text-3xl leading-snug"
-            style={{ fontFamily: "'Brush Script MT', cursive" }}
-          >
-            "I promise to laugh with you, fight over the last samosa with you, and
-            love you a little more every single day." 💍
-          </p>
-          <p className="mt-3 text-sm opacity-90">— Forever yours, Israr</p>
-        </div>
-
         <p className="mt-10 text-rose-700 font-semibold text-lg">
           She said <span className="text-rose-600 font-extrabold text-xl">YES</span> 💍✨
         </p>
@@ -257,8 +298,8 @@ function YesPage() {
           ← Ask again 🙈
         </Link>
 
-        <p className="mt-8 text-xs text-rose-700/60 italic">
-          Made with endless 💕 just for you, Alisha.
+        <p className="mt-8 text-sm text-rose-700/80 italic" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+          Made with 💕 by Israr for my love Alisha
         </p>
       </main>
     </div>

@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRef, useState } from "react";
-import { Heart, Sparkles, Lock, Mail } from "lucide-react";
+import { Heart, Sparkles, Lock, Mail, X } from "lucide-react";
 import { CoupleSvg } from "@/components/CoupleSvg";
 
 export const Route = createFileRoute("/")({
@@ -24,6 +24,8 @@ const FUNNY_MESSAGES = [
   "Stop chasing, start saying YES 💍",
 ];
 
+const NO_EMOJIS = ["🙄", "🥴", "🤨", "😒", "😏", "🫤", "😩", "😐", "🙃", "😬"];
+
 function Index() {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,6 +33,9 @@ function Index() {
   const [noPos, setNoPos] = useState<{ top: number; left: number } | null>(null);
   const [msg, setMsg] = useState<string>("");
   const [clicks, setClicks] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const noEmoji = NO_EMOJIS[clicks % NO_EMOJIS.length];
 
   const dodge = () => {
     const container = containerRef.current;
@@ -44,7 +49,6 @@ function Index() {
     const btnH = 44;
     const padding = 8;
 
-    // try up to 30 times to find a position that doesn't overlap Yes button
     let top = 0;
     let left = 0;
     for (let i = 0; i < 30; i++) {
@@ -74,7 +78,6 @@ function Index() {
           "radial-gradient(circle at 20% 10%, #ffe5ec 0%, transparent 50%), radial-gradient(circle at 80% 80%, #ffd1dc 0%, transparent 50%), linear-gradient(135deg, #fff5f7 0%, #ffe0eb 50%, #fce4ec 100%)",
       }}
     >
-      {/* Decorative floating hearts */}
       {Array.from({ length: 14 }).map((_, i) => (
         <Heart
           key={i}
@@ -92,7 +95,6 @@ function Index() {
       ))}
 
       <div className="relative z-10 w-full max-w-md">
-        {/* Cartoon couple peeking from top */}
         <div className="mx-auto -mb-8 w-40 h-40 relative z-20">
           <CoupleSvg className="w-full h-full drop-shadow-xl" />
         </div>
@@ -115,10 +117,9 @@ function Index() {
             Will u marry me<br />Alisha?
           </h1>
           <p className="mt-2 text-sm text-rose-900/70 italic">
-            Please sign in your heart to continue 💌
+            Alisha please sign in my heart to continue 🙈🤭
           </p>
 
-          {/* Tiny love + fun lines */}
           <div className="mt-4 grid grid-cols-1 gap-2 text-[12px]">
             <div className="rounded-xl bg-rose-100/60 border border-rose-200 px-3 py-2 text-rose-700 italic">
               "Tum mere ho, bas itna hi kaafi hai zindagi ke liye." 💞
@@ -131,7 +132,6 @@ function Index() {
             </div>
           </div>
 
-          {/* Editable login fields */}
           <div className="mt-6 space-y-4 text-left">
             <div className="relative">
               <label className="text-[11px] font-semibold text-rose-700/80 uppercase tracking-wider">
@@ -161,11 +161,10 @@ function Index() {
             </div>
           </div>
 
-          {/* Buttons area */}
           <div ref={containerRef} className="relative mt-8 h-44 rounded-2xl bg-rose-50/40 border border-dashed border-rose-200">
             <button
               ref={yesRef}
-              onClick={() => navigate({ to: "/yes" })}
+              onClick={() => setShowPopup(true)}
               className="absolute left-1/2 top-4 -translate-x-1/2 rounded-full bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 px-10 py-3 text-base font-bold text-white shadow-xl shadow-rose-400/50 hover:scale-110 active:scale-95 transition-transform"
             >
               Yes 💖
@@ -186,7 +185,7 @@ function Index() {
               }
               className="absolute rounded-full border-2 border-rose-300 bg-white px-7 py-2.5 text-sm font-semibold text-rose-500 shadow-md transition-all duration-200 ease-out"
             >
-              No 🙄
+              No {noEmoji}
             </button>
 
             {msg && (
@@ -202,9 +201,56 @@ function Index() {
         </div>
 
         <p className="mt-4 text-center text-xs text-rose-700/60">
-          Made with 💕 for my favorite human
+          Made with 💕 by Israr for my love Alisha
         </p>
       </div>
+
+      {showPopup && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
+          style={{ background: "rgba(120, 20, 60, 0.45)", backdropFilter: "blur(6px)" }}
+          onClick={() => setShowPopup(false)}
+        >
+          <div
+            className="relative w-full max-w-sm rounded-3xl bg-gradient-to-br from-white via-rose-50 to-pink-100 p-6 sm:p-7 text-center shadow-2xl border-2 border-white animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+            style={{ boxShadow: "0 30px 80px -10px rgba(255,80,130,0.6)" }}
+          >
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-3 right-3 rounded-full p-1.5 text-rose-400 hover:bg-rose-100 transition"
+              aria-label="Close"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 to-pink-500 flex items-center justify-center shadow-lg shadow-rose-300">
+              <Heart className="w-8 h-8 text-white" fill="currentColor" />
+            </div>
+
+            <h2
+              className="mt-4 text-3xl font-bold bg-gradient-to-r from-rose-600 to-fuchsia-500 bg-clip-text text-transparent"
+              style={{ fontFamily: "'Brush Script MT', cursive" }}
+            >
+              Shukriya Meri Jaan 💖
+            </h2>
+
+            <div className="mt-3 space-y-2 text-sm text-rose-900/80 italic" style={{ fontFamily: "Georgia, serif" }}>
+              <p>"Alisha, tumne haan keh ke meri puri duniya jeeta li 🌍💍"</p>
+              <p>"Aaj se har subah tumhari muskaan se shuru hogi, aur har raat tumhari yaadon mein. 🌙"</p>
+              <p>"Tum meri kismat ho, meri dua ho, meri har dhadkan ho. ❤️"</p>
+              <p className="text-rose-600 font-semibold not-italic">— Forever yours, Israr</p>
+            </div>
+
+            <button
+              onClick={() => navigate({ to: "/yes" })}
+              className="mt-5 w-full rounded-full bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 py-3 text-sm font-bold text-white shadow-lg shadow-rose-400/50 hover:scale-[1.02] active:scale-95 transition"
+            >
+              OK, lets celebrate 💍✨
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
