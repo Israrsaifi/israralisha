@@ -4,6 +4,7 @@ import { CoupleSvg } from "@/components/CoupleSvg";
 import { AutoCarousel } from "@/components/AutoCarousel";
 import { MemoryCounter } from "@/components/MemoryCounter";
 import { LoveWheel } from "@/components/LoveWheel";
+import { IshuuChat } from "@/components/IshuuChat";
 
 export const Route = createFileRoute("/yes")({
   head: () => ({
