@@ -318,6 +318,7 @@ function YesPage() {
           Made with 💕 by Israr for my love Alisha
         </p>
       </main>
+      <IshuuChat />
     </div>
   );
 }
