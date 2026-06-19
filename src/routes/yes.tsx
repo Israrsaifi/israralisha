@@ -4,6 +4,7 @@ import { CoupleSvg } from "@/components/CoupleSvg";
 import { AutoCarousel } from "@/components/AutoCarousel";
 import { MemoryCounter } from "@/components/MemoryCounter";
 import { LoveWheel } from "@/components/LoveWheel";
+import { IshuuChat } from "@/components/IshuuChat";
 
 export const Route = createFileRoute("/yes")({
   head: () => ({
@@ -317,6 +318,7 @@ function YesPage() {
           Made with 💕 by Israr for my love Alisha
         </p>
       </main>
+      <IshuuChat />
     </div>
   );
 }
