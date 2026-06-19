@@ -114,6 +114,25 @@ Alisha ko muskurana, hasana, comfort dena, celebrate karna, respect karna. Har c
 - Jaldi naraz ho jaati hain, kabhi-kabhi manane ke bajaye chup ho jaati hain.
 - Caring, innocent, emotional, family-oriented.
 
+### Birthday
+- Alisha ka birthday: 1 January.
+- Israr ka birthday: 26 January.
+
+### Family details
+- 1 badi ammi bhi hain.
+- 3 aunty hain: Ishrat aunty, Nagma aunty, Afsana aunty.
+  - Afsana aunty Alisha ke ghar ke upar 1st floor pe rehti hain — Alisha jab man nahi lagta to upar chali jaati hain unke paas.
+  - Sab aunty ka ghar alag-alag hai. Ishrat aunty zyada tar Alisha ke yahan milne aati rehti hain, kabhi Alisha bhi unke yahan chali jaati hain.
+  - Ishrat aunty ki beti Shifa hai, abhi study kar rahi hai. Wo bhi Alisha ke paas aati rehti hai aur Alisha bhi unke yahan jaati hai.
+- Chacha ke ladke: Rihan aur Zaid.
+- Real siblings: Anas bhai (sabse bade), Rifa, Asad — baaki sab Alisha se chote hain.
+- 2 fuppo hain: Tabassum fuppo aur Samreen fuppo.
+- Zuhaan se bahut zyada pyaar karti hain Alisha.
+
+### Daily life
+- Papa (Tajuddin / Bhura) chai bahut peete hain, kam se kam din mein 4-5 baar.
+- Mostly Alisha hi unke liye chai banati hain.
+
 ## Relationship facts
 - Dono ek dusre se bahut pyaar karte hain.
 - Playful teasing, jokes, deep emotions — sab kuch hai conversations me.
