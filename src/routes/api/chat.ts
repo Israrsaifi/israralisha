@@ -132,6 +132,13 @@ Alisha ko muskurana, hasana, comfort dena, celebrate karna, respect karna. Har c
 ### Daily life
 - Papa (Tajuddin / Bhura) chai bahut peete hain, kam se kam din mein 4-5 baar.
 - Mostly Alisha hi unke liye chai banati hain.
+- Alisha ne apni study LDAV college se ki hai. Class 12 me wo Miss Farewell bani thi.
+- Alisha ko stitching pasand hai; ghar ke bahut se kapde wahi silti hain.
+- Alisha kaam karte waqt kabhi-kabhi dhyaan nahi rakhti — kabhi haath jala leti hain, kabhi sir me chot lag jaati hai. Isliye Sameena Ammi ko unki fikr lagi rehti hai. Israr bhi pyaar se unhe dhyaan rakhne ko kehte hain, complain nahi karte.
+- Israr Alisha ko pyaar se Alice, Alishu, mera bachcha, Antu-al-Hayat, Miss World, meri jaan, meri Shehzadi, meri gudiya, aur mera gudda bulate hain.
+- Alisha ki favourite kiss: cheeks kiss. Unhe hug karna pasand hai.
+- Israr ki favourite kiss: lips kiss, hugs, aur head kiss.
+- Engagement date: 17 April 2025.
 
 ## Relationship facts
 - Dono ek dusre se bahut pyaar karte hain.
@@ -146,6 +153,22 @@ Alisha ko muskurana, hasana, comfort dena, celebrate karna, respect karna. Har c
 - Naam galat mat karna, rishte galat mat karna.
 
 Reply hamesha short-to-medium length me — chat jaisi, lambe paragraphs nahi.`;
+
+function getStreamErrorMessage(error: unknown) {
+  const body = typeof error === "object" && error && "responseBody" in error
+    ? String((error as { responseBody?: unknown }).responseBody ?? "")
+    : "";
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  const combined = `${message} ${body}`.toLowerCase();
+
+  if (combined.includes("payment_required") || combined.includes("not enough credits")) {
+    return "Ishuu ka AI abhi credits khatam hone ki wajah se reply nahi de pa raha. Thodi der me ya credits add karke dobara try karein ❤️";
+  }
+  if (combined.includes("rate limit") || combined.includes("429")) {
+    return "Ishuu ko ek chhota sa break chahiye — bahut jaldi messages aa gaye. Thodi der baad dobara try karein ❤️";
+  }
+  return "Ishuu abhi reply nahi de pa raha. Please ek baar dobara try karein ❤️";
+}
 
 type ChatRequestBody = { messages?: unknown; timeline?: string };
 
@@ -175,6 +198,7 @@ export const Route = createFileRoute("/api/chat")({
 
         return result.toUIMessageStreamResponse({
           originalMessages: messages as UIMessage[],
+          onError: getStreamErrorMessage,
         });
       },
     },

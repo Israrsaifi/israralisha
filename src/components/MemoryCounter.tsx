@@ -38,9 +38,10 @@ function Cell({ label, value }: { label: string; value: number }) {
 }
 
 export function MemoryCounter() {
-  const [t, setT] = useState(() => diff(Date.now()));
+  const [t, setT] = useState(() => diff(START));
 
   useEffect(() => {
+    setT(diff(Date.now()));
     const id = setInterval(() => setT(diff(Date.now())), 1000);
     return () => clearInterval(id);
   }, []);
