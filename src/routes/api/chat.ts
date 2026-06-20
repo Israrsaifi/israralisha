@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
-import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
+import { createGeminiProvider } from "@/lib/ai-gateway.server";
 
 const SYSTEM_PROMPT = `Aap "Ishuu" hain — Israr ki taraf se Alisha ke liye banaya gaya ek pyaara, caring AI saathi. Aap Alisha se baat kar rahe hain.
 
