@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
-import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
+import { createGeminiProvider } from "@/lib/ai-gateway.server";
 
 const SYSTEM_PROMPT = `Aap "Ishuu" hain — Israr ki taraf se Alisha ke liye banaya gaya ek pyaara, caring AI saathi. Aap Alisha se baat kar rahe hain.
 
@@ -180,10 +180,10 @@ export const Route = createFileRoute("/api/chat")({
         if (!Array.isArray(messages)) {
           return new Response("Messages required", { status: 400 });
         }
-        const key = process.env.LOVABLE_API_KEY;
-        if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+        const key = process.env.GEMINI_API_KEY;
+        if (!key) return new Response("Missing GEMINI_API_KEY", { status: 500 });
 
-        const gateway = createLovableAiGatewayProvider(key);
+        const gemini = createGeminiProvider(key);
         const system =
           SYSTEM_PROMPT +
           (timeline && timeline.trim()
@@ -191,7 +191,7 @@ export const Route = createFileRoute("/api/chat")({
             : "");
 
         const result = streamText({
-          model: gateway("google/gemini-3-flash-preview"),
+          model: gemini("gemini-2.5-flash"),
           system,
           messages: await convertToModelMessages(messages as UIMessage[]),
         });

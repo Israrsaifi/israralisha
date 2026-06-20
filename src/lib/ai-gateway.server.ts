@@ -1,8 +1,4 @@
-import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 
-export const createLovableAiGatewayProvider = (apiKey: string) =>
-  createOpenAICompatible({
-    name: "lovable-ai-gateway",
-    baseURL: "https://ai.gateway.lovable.dev/v1",
-    headers: { "Lovable-API-Key": apiKey },
-  });
+export const createGeminiProvider = (apiKey: string) =>
+  createGoogleGenerativeAI({ apiKey });
