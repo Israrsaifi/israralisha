@@ -41,7 +41,7 @@ export function IshuuChat() {
     }),
   ).current;
 
-  const { messages, sendMessage, status } = useChat({
+  const { messages, sendMessage, status, error, clearError } = useChat({
     id: "ishuu-main",
     messages: initial,
     transport,
@@ -67,8 +67,13 @@ export function IshuuChat() {
     if (!text || busy) return;
     const tag = autoTagMessage(text);
     if (tag) addTimelineEvent(tag);
+    clearError();
     setInput("");
-    await sendMessage({ text });
+    try {
+      await sendMessage({ text });
+    } catch {
+      // useChat exposes the user-facing error through `error` below.
+    }
   };
 
   return (
@@ -183,6 +188,13 @@ export function IshuuChat() {
                         style={{ animationDelay: "0.3s" }}
                       />
                     </div>
+                  </div>
+                </div>
+              )}
+              {status === "error" && error && (
+                <div className="flex justify-start">
+                  <div className="max-w-[82%] rounded-2xl rounded-bl-md bg-white text-rose-900 border border-rose-100 px-3.5 py-2 text-[13.5px] leading-relaxed shadow-sm">
+                    {error.message || "Ishuu abhi reply nahi de pa raha. Please dobara try karein ❤️"}
                   </div>
                 </div>
               )}
