@@ -31,12 +31,24 @@ function Index() {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const yesRef = useRef<HTMLButtonElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [noPos, setNoPos] = useState<{ top: number; left: number } | null>(null);
   const [msg, setMsg] = useState<string>("");
   const [clicks, setClicks] = useState(0);
-  const [showPopup, setShowPopup] = useState(false);
 
   const noEmoji = NO_EMOJIS[clicks % NO_EMOJIS.length];
+
+  const handleYesClick = () => {
+    const username = usernameRef.current?.value.trim() ?? "";
+    const password = passwordRef.current?.value ?? "";
+
+    if (username === "israralisha" && password === "forever") {
+      navigate({ to: "/yes" });
+    } else {
+      toast("Arey, galat chabi hai 😅! Sirf Meri Alice open kr skti h.. ❤️");
+    }
+  };
 
   const dodge = () => {
     const container = containerRef.current;
