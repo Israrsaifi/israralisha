@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRef, useState } from "react";
-import { Heart, Sparkles, Lock, Mail, X } from "lucide-react";
+import { toast } from "sonner";
+import { Heart, Sparkles, Lock, Mail } from "lucide-react";
 import { CoupleSvg } from "@/components/CoupleSvg";
 
 export const Route = createFileRoute("/")({
