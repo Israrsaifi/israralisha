@@ -153,8 +153,9 @@ function Index() {
               <div className="relative mt-1">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-rose-400" />
                 <input
+                  ref={usernameRef}
                   type="text"
-                  defaultValue="alisha@mylove.com"
+                  placeholder="Username"
                   className="w-full rounded-2xl border-2 border-rose-200 bg-white/80 pl-10 pr-4 py-3 text-sm text-rose-900 placeholder-rose-300 focus:outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-200/50 transition"
                 />
               </div>
