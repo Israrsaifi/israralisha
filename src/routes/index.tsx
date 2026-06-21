@@ -179,7 +179,7 @@ function Index() {
           <div ref={containerRef} className="relative mt-8 h-44 rounded-2xl bg-rose-50/40 border border-dashed border-rose-200">
             <button
               ref={yesRef}
-              onClick={() => setShowPopup(true)}
+              onClick={handleYesClick}
               className="absolute left-1/2 top-4 -translate-x-1/2 rounded-full bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 px-10 py-3 text-base font-bold text-white shadow-xl shadow-rose-400/50 hover:scale-110 active:scale-95 transition-transform"
             >
               Yes 💖
