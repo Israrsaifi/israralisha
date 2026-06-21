@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRef, useState } from "react";
-import { Heart, Sparkles, Lock, Mail, X } from "lucide-react";
+import { toast } from "sonner";
+import { Heart, Sparkles, Lock, Mail } from "lucide-react";
 import { CoupleSvg } from "@/components/CoupleSvg";
 
 export const Route = createFileRoute("/")({
@@ -30,12 +31,24 @@ function Index() {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const yesRef = useRef<HTMLButtonElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [noPos, setNoPos] = useState<{ top: number; left: number } | null>(null);
   const [msg, setMsg] = useState<string>("");
   const [clicks, setClicks] = useState(0);
-  const [showPopup, setShowPopup] = useState(false);
 
   const noEmoji = NO_EMOJIS[clicks % NO_EMOJIS.length];
+
+  const handleYesClick = () => {
+    const username = usernameRef.current?.value.trim() ?? "";
+    const password = passwordRef.current?.value ?? "";
+
+    if (username === "israralisha" && password === "forever") {
+      navigate({ to: "/yes" });
+    } else {
+      toast("Arey, galat chabi hai 😅! Sirf Meri Alice open kr skti h.. ❤️");
+    }
+  };
 
   const dodge = () => {
     const container = containerRef.current;
@@ -140,8 +153,9 @@ function Index() {
               <div className="relative mt-1">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-rose-400" />
                 <input
+                  ref={usernameRef}
                   type="text"
-                  defaultValue="alisha@mylove.com"
+                  placeholder="Username"
                   className="w-full rounded-2xl border-2 border-rose-200 bg-white/80 pl-10 pr-4 py-3 text-sm text-rose-900 placeholder-rose-300 focus:outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-200/50 transition"
                 />
               </div>
@@ -153,8 +167,9 @@ function Index() {
               <div className="relative mt-1">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-rose-400" />
                 <input
+                  ref={passwordRef}
                   type="password"
-                  defaultValue="iloveisrar"
+                  placeholder="Password"
                   className="w-full rounded-2xl border-2 border-rose-200 bg-white/80 pl-10 pr-4 py-3 text-sm text-rose-900 placeholder-rose-300 focus:outline-none focus:border-rose-400 focus:ring-4 focus:ring-rose-200/50 transition"
                 />
               </div>
@@ -164,7 +179,7 @@ function Index() {
           <div ref={containerRef} className="relative mt-8 h-44 rounded-2xl bg-rose-50/40 border border-dashed border-rose-200">
             <button
               ref={yesRef}
-              onClick={() => setShowPopup(true)}
+              onClick={handleYesClick}
               className="absolute left-1/2 top-4 -translate-x-1/2 rounded-full bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 px-10 py-3 text-base font-bold text-white shadow-xl shadow-rose-400/50 hover:scale-110 active:scale-95 transition-transform"
             >
               Yes 💖
@@ -205,52 +220,6 @@ function Index() {
         </p>
       </div>
 
-      {showPopup && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
-          style={{ background: "rgba(120, 20, 60, 0.45)", backdropFilter: "blur(6px)" }}
-          onClick={() => setShowPopup(false)}
-        >
-          <div
-            className="relative w-full max-w-sm rounded-3xl bg-gradient-to-br from-white via-rose-50 to-pink-100 p-6 sm:p-7 text-center shadow-2xl border-2 border-white animate-scale-in"
-            onClick={(e) => e.stopPropagation()}
-            style={{ boxShadow: "0 30px 80px -10px rgba(255,80,130,0.6)" }}
-          >
-            <button
-              onClick={() => setShowPopup(false)}
-              className="absolute top-3 right-3 rounded-full p-1.5 text-rose-400 hover:bg-rose-100 transition"
-              aria-label="Close"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 to-pink-500 flex items-center justify-center shadow-lg shadow-rose-300">
-              <Heart className="w-8 h-8 text-white" fill="currentColor" />
-            </div>
-
-            <h2
-              className="mt-4 text-3xl font-bold bg-gradient-to-r from-rose-600 to-fuchsia-500 bg-clip-text text-transparent"
-              style={{ fontFamily: "'Brush Script MT', cursive" }}
-            >
-              Shukriya Meri Jaan 💖
-            </h2>
-
-            <div className="mt-3 space-y-2 text-sm text-rose-900/80 italic" style={{ fontFamily: "Georgia, serif" }}>
-              <p>"Alisha, tumne haan keh ke meri puri duniya jeeta li 🌍💍"</p>
-              <p>"Aaj se har subah tumhari muskaan se shuru hogi, aur har raat tumhari yaadon mein. 🌙"</p>
-              <p>"Tum meri kismat ho, meri dua ho, meri har dhadkan ho. ❤️"</p>
-              <p className="text-rose-600 font-semibold not-italic">— Forever yours, Israr</p>
-            </div>
-
-            <button
-              onClick={() => navigate({ to: "/yes" })}
-              className="mt-5 w-full rounded-full bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 py-3 text-sm font-bold text-white shadow-lg shadow-rose-400/50 hover:scale-[1.02] active:scale-95 transition"
-            >
-              OK, lets celebrate 💍✨
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
