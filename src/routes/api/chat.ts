@@ -155,19 +155,15 @@ Alisha ko muskurana, hasana, comfort dena, celebrate karna, respect karna. Har c
 Reply hamesha short-to-medium length me — chat jaisi, lambe paragraphs nahi.`;
 
 function getStreamErrorMessage(error: unknown) {
-  const body = typeof error === "object" && error && "responseBody" in error
-    ? String((error as { responseBody?: unknown }).responseBody ?? "")
-    : "";
   const message = error instanceof Error ? error.message : String(error ?? "");
-  const combined = `${message} ${body}`.toLowerCase();
+  const combined = message.toLowerCase();
 
-  if (combined.includes("payment_required") || combined.includes("not enough credits")) {
-    return "Ishuu ka AI abhi credits khatam hone ki wajah se reply nahi de pa raha. Thodi der me ya credits add karke dobara try karein ❤️";
+  if (combined.includes("rate_limit") || combined.includes("429")) {
+    return "Ishuu ko ek chhota sa break chahiye - bahut jaldi messages aa gaye. Thodi der baad dobara try karein ❤️";
   }
-  if (combined.includes("rate limit") || combined.includes("429")) {
-    return "Ishuu ko ek chhota sa break chahiye — bahut jaldi messages aa gaye. Thodi der baad dobara try karein ❤️";
-  }
-  return "Ishuu abhi reply nahi de pa raha. Please ek baar dobara try karein ❤️";
+
+  // Default Gemini / Network temporary error
+  return "Ishuu abhi thoda busy hai ya network issue hai. Please ek baar dobara try karein ❤️";
 }
 
 type ChatRequestBody = { messages?: unknown; timeline?: string };
