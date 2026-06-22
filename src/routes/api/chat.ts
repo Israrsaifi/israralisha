@@ -56,7 +56,7 @@ export const Route = createFileRoute("/api/chat")({
             : "");
 
         const formattedMessages = (messages as any[]).map(msg => ({
-          role: msg.role === 'user' ? 'user' : 'assistant',
+          role: (msg.role === 'user' ? 'user' : 'assistant') as 'user' | 'assistant',
           content: typeof msg.content === 'string' ? msg.content : String(msg.content || ''),
         }));
 
