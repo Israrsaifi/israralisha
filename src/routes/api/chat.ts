@@ -61,7 +61,7 @@ export const Route = createFileRoute("/api/chat")({
         }));
 
         const result = streamText({
-          model: gemini("gemini-2.5-flash"),
+          model: gemini("gemini-2.0-flash"),
           system: system,
           messages: formattedMessages,
           maxOutputTokens: 2048,
