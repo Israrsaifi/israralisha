@@ -64,7 +64,7 @@ export const Route = createFileRoute("/api/chat")({
           model: gemini("gemini-2.5-flash"),
           system: system,
           messages: formattedMessages,
-          maxTokens: 2048,
+          maxOutputTokens: 2048,
           temperature: 0.9,
           providerOptions: {
             google: {
